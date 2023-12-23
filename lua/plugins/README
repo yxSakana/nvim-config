@@ -1,0 +1,58 @@
+## lualine
+
+@Github: https://github.com/nvim-lualine/lualine.nvim
+
+
+@Brief: 易于配置的`Neovim`状态栏
+
+
+## neo-tree
+
+@Github: https://github.com/nvim-neo-tree/neo-tree.nvim
+
+@Brief: 浏览文件系统和其他树状结构，包括侧边栏、浮动窗口
+
+## telescope
+
+@Github: https://github.com/nvim-telescope/telescope.nvim
+
+@Brief: 列表模糊查找
+
+## lsp
+
+## cmp
+
+@Github: https://github.com/hrsh7th/nvim-cmp
+
+@Brief: 自动补全
+
+## nvim-treesitter
+
+@Github: https://github.com/nvim-treesitter/nvim-treesitter
+
+@Brief: 语法高亮
+
+## Comment
+
+@Github: https://github.com/numToStr/Comment.nvim
+
+@Brief: 快速注释
+
+## null-ls
+
+@Github: https://github.com/jose-elias-alvarez/null-ls.nvim
+
+@Brief: 基于LSP注入代码诊断,代码操作
+
+## gitsigns
+
+@Github: https://github.com/lewis6991/gitsigns.nvim
+
+@Brief: SVG支持
+
+## which-key
+
+@Github: https://github.com/folke/which-key.nvim
+
+@Brief: 好
+

@@ -1,0 +1,22 @@
+# Editor Config See: https://editorconfig.org/
+
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.{c,cpp,cc,h,hpp,py,lua,js}]
+charset = utf-8
+
+[*.{py}]
+indent_style = space
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+
+[*.{c,cpp,cc,h,hpp,lua,yaml,yml,json}]
+indent_style = space
+indent_size = 2
+

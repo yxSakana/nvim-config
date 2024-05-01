@@ -3,7 +3,7 @@
 -- @author yx
 -- @brief nvim colorscheme utils
 
-local function getIfAvaliable(name, opt)
+local function get_if_avaliable(name, opt)
     local lua_ok, colorscheme = pcall(require, name)
     if lua_ok then
         colorscheme.setup(opts)
@@ -18,7 +18,7 @@ local function getIfAvaliable(name, opt)
     return "default"
 end
 
-local colorscheme = getIfAvaliable("catppuccin")
+local colorscheme = get_if_avaliable("catppuccin")
 
 return colorscheme
 

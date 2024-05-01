@@ -22,6 +22,7 @@ if not ok then
 	return
 end
 
+require("helpers.maps").set_leader(" ")
 lazy.setup("plugins")
 require("helpers.maps").map("n", "<leader>L", lazy.show, "Show Lazy")
 

@@ -48,7 +48,6 @@ map("v", "K", ":m '<-2<CR>gv=gv")
 map("n", "<leader>nh", ":nohl<CR>") -- 取消高亮
 
 -----------------------
---   Plugins keymaps -- 
+--  Plugins keymaps  -- 
 -----------------------
--- require("helpers.maps").map("n", "<leader>L", lazy.show, "Show Lazy")
 

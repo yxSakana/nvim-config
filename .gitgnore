@@ -2,4 +2,5 @@
 .vscode/
 .code/
 log/
+lazy-lock.json
 

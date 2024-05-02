@@ -1,6 +1,6 @@
 return {
   "tpope/vim-surround", -- Surround stuff with the ys-, cs-, ds- commands; 快速修改包围符号
-    -- "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically;
+  "tpope/vim-sleuth",   -- Detect tabstop and shiftwidth automatically;
   -- {{{
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -12,7 +12,8 @@ return {
   {
     "numToStr/Comment.nvim",
     config = function()
-     return require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+      require('Comment').setup()
+      return require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
     end
   },
   -- }}}

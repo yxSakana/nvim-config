@@ -9,21 +9,27 @@ return {
         tag = "legacy",
         event = "LspAttach",
       },
-      "folke/neodev.nvim",    -- for neovim devlop
+      "folke/neodev.nvim",     -- for neovim devlop
       "RRethy/vim-illuminate", -- highlighting
-      "hrsh7th/cmp-nvim-lsp", -- cmp
+      "hrsh7th/cmp-nvim-lsp",  -- cmp
     },
     config = function()
-      require("mason").setup()
+      require("mason").setup({
+        ensure_installed = {
+          "cpplint",
+          "cmakelang",
+          "cmakelint",
+          "clangd-format",
+          "cpptools",
+          "codelldb"
+        }
+      })
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
+          "pylsp",
           "clangd",
           "cmake",
-          -- "cpplint",
-          -- "clangd-format",
-          -- "cpptools",
-          -- "codelldb"
         },
         automatic_installation = false
       })
@@ -112,7 +118,35 @@ return {
       require("lspconfig").clangd.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        filetypes = { "h", "c", "cpp", "cc", "hpp" }
+        filetypes = { "h", "c", "cpp", "cc", "hpp" },
+        keys = { { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Swith Source/Header (C/C++)" } },
+        root_dir = require("lspconfig").util.root_pattern(
+          '.clangd',
+          '.clang-tidy',
+          '.clang-format',
+          'compile_commands.json',
+          'compile_flags.txt',
+          'configure.ac',
+          '.git'
+        )
+      })
+
+      -- CMake
+      require("lspconfig").cmake.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "cmake" },
+        init_options = {
+          buildDirectory = "build"
+        },
+        root_dir = require("lspconfig").util.root_pattern(
+          "CMakePresets.json",
+          "CTestConfig.cmake",
+          ".git",
+          "build",
+          "cmake"
+        ),
+        single_file_support = true,
       })
     end,
   }

@@ -10,6 +10,7 @@ return {
       c = { "cpplint" },
       cpp = { "cpplint" },
       cmake = { "cmakelint" },
+      docker = { "hadoint" },
     },
     -- LazyVim extension to easily override linter options
     -- or add custom linters.

@@ -14,22 +14,15 @@ return {
       "hrsh7th/cmp-nvim-lsp",  -- cmp
     },
     config = function()
-      require("mason").setup({
-        ensure_installed = {
-          "cpplint",
-          "cmakelang",
-          "cmakelint",
-          "clangd-format",
-          "cpptools",
-          "codelldb"
-        }
-      })
+      require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
           "pylsp",
           "clangd",
           "cmake",
+          "dockerls",
+          "docker_compose_language_service",
         },
         automatic_installation = false
       })
@@ -148,6 +141,90 @@ return {
         ),
         single_file_support = true,
       })
+
+      -- Python
+      require("lspconfig").pylsp.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "python" },
+        settings = {
+          pylsp = {
+            plugins = {
+              flake8 = {
+                enabled = true,
+                maxLineLength = 88, -- Black's line length
+              },
+              -- Disable plugins overlapping with flake8
+              pycodestyle = {
+                enabled = false,
+              },
+              mccabe = {
+                enabled = false,
+              },
+              pyflakes = {
+                enabled = false,
+              },
+              -- Use Black as the formatter
+              autopep8 = {
+                enabled = false,
+              },
+            },
+          },
+        },
+      })
+
+      -- Docker
+      require("lspconfig").dockerls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = { "docker-langserver", "--stdio" },
+        filetypes = { "dockerfile" },
+        root_dir = require("lspconfig").util.root_pattern(
+          "Dockerfile"
+        ),
+        single_file_support = true,
+      })
+      require("lspconfig").docker_compose_language_service.setup({})
     end,
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "cpplint",
+        "cmakelang",
+        "cmakelint",
+        "clang-format",
+        "cpptools",
+        "codelldb",
+        "flake8",
+        "hadolint"
+      }
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      local mr = require("mason-registry")
+      mr:on("package:install:success", function()
+        vim.defer_fn(function()
+          require("lazy.core.handler.event").trigger({
+            event = "FileType",
+            buf = vim.api.nvim_get_current_buf(),
+          })
+        end, 100)
+      end)
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
+      end
+    end
   }
 }

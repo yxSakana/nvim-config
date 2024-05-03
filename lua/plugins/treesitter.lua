@@ -13,7 +13,8 @@ return {
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {
           "c", "cpp", "go", "lua", "python", "rust", "vimdoc", "vim",
-          "bash", "yaml", "xml", "luadoc", "markdown", "regex", "toml"
+          "bash", "yaml", "xml", "luadoc", "markdown", "regex", "toml",
+          "dockerfile",
         },
 
         highlight = { enable = true },
